@@ -51,6 +51,12 @@
       <HintPath>..\packages\MahApps.Metro.1.1.2.0\lib\net45\MahApps.Metro.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="MaterialDesignColors, Version=1.1.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialDesignColors.1.1.2\lib\net45\MaterialDesignColors.dll</HintPath>
+    </Reference>
+    <Reference Include="MaterialDesignThemes.Wpf, Version=2.3.0.823, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialDesignThemes.2.3.0.823\lib\net45\MaterialDesignThemes.Wpf.dll</HintPath>
+    </Reference>
     <Reference Include="MySql.Data, Version=6.9.8.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <HintPath>..\packages\MySql.Data.6.9.8\lib\net45\MySql.Data.dll</HintPath>
       <Private>True</Private>
@@ -203,7 +209,6 @@
     <Resource Include="Resources\MusicBG.jpeg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\homecinema.jpg" />
     <Resource Include="Resources\MovieBG.jpg" />
     <Resource Include="Resources\PictureBG.jpg" />
     <Resource Include="Resources\SettingsBG.jpg" />
@@ -216,9 +221,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\back.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\homecinema.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\search.png" />
@@ -265,6 +267,54 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\icon-music.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\ic_play.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\ic_exit.png" />
+    <Resource Include="Resources\ic_next.png" />
+    <Resource Include="Resources\ic_pause.png" />
+    <Resource Include="Resources\ic_previous.png" />
+    <Resource Include="Resources\ic_stop.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\ic_forward.png" />
+    <Resource Include="Resources\ic_rewind.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\ic_random.png" />
+    <Resource Include="Resources\ic_repeat.png" />
+    <Resource Include="Resources\ic_volume_off.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\ic_volume_on.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\ic_film.png" />
+    <Resource Include="Resources\ic_music.png" />
+    <Resource Include="Resources\ic_picture.png" />
+    <Resource Include="Resources\ic_radio.png" />
+    <Resource Include="Resources\ic_settings.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\homecinema.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\MovieBG.png" />
+    <Resource Include="Resources\MusicBG.png" />
+    <Resource Include="Resources\PictureBG.png" />
+    <Resource Include="Resources\RadioBG.png" />
+    <Resource Include="Resources\SettingsBG.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\MusicBG2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\MovieBG2.png" />
+    <Resource Include="Resources\PicturesBG2.png" />
+    <Resource Include="Resources\RadioBG2.png" />
+    <Resource Include="Resources\SettingsBG2.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

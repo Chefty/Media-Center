@@ -63,15 +63,15 @@ namespace MyMediaCenter.View
         private void LoadBackgroundPicture(string ButtonName)
         {
             if (ButtonName.Equals("MusicBtn"))
-                LayoutRoot.Background = new ImageBrush(new BitmapImage(new Uri(BaseUriHelper.GetBaseUri(this), "../Resources/MusicBG.jpeg")));
+                LayoutRoot.Background = new ImageBrush(new BitmapImage(new Uri(BaseUriHelper.GetBaseUri(this), "../Resources/MusicBG.png")));
             else if (ButtonName.Equals("VideoBtn"))
-                LayoutRoot.Background = new ImageBrush(new BitmapImage(new Uri(BaseUriHelper.GetBaseUri(this), "../Resources/MovieBG.jpg")));
+                LayoutRoot.Background = new ImageBrush(new BitmapImage(new Uri(BaseUriHelper.GetBaseUri(this), "../Resources/MovieBG.png")));
             else if (ButtonName.Equals("PictureBtn"))
-                LayoutRoot.Background = new ImageBrush(new BitmapImage(new Uri(BaseUriHelper.GetBaseUri(this), "../Resources/PictureBG.jpg")));
+                LayoutRoot.Background = new ImageBrush(new BitmapImage(new Uri(BaseUriHelper.GetBaseUri(this), "../Resources/PictureBG.png")));
             else if (ButtonName.Equals("SettingsBtn"))
-                LayoutRoot.Background = new ImageBrush(new BitmapImage(new Uri(BaseUriHelper.GetBaseUri(this), "../Resources/SettingsBG.jpg")));
+                LayoutRoot.Background = new ImageBrush(new BitmapImage(new Uri(BaseUriHelper.GetBaseUri(this), "../Resources/SettingsBG.png")));
             else if (ButtonName.Equals("RadioBtn"))
-                LayoutRoot.Background = new ImageBrush(new BitmapImage(new Uri(BaseUriHelper.GetBaseUri(this), "../Resources/radioBG.jpg")));
+                LayoutRoot.Background = new ImageBrush(new BitmapImage(new Uri(BaseUriHelper.GetBaseUri(this), "../Resources/RadioBG.png")));
         }
 
         private async void CommonMouseOver(object sender, EventArgs e)
@@ -79,27 +79,27 @@ namespace MyMediaCenter.View
             System.Windows.Controls.Button btn = sender as System.Windows.Controls.Button;
             var LayoutRootAnim = new DoubleAnimation();
             LoadBackgroundPicture(btn.Name);
-            LayoutRootAnim.From = 0;
-            LayoutRootAnim.To = 1;
-            LayoutRootAnim.Duration = new Duration(TimeSpan.FromSeconds(0.5));
-            LayoutRoot.Background.BeginAnimation(SolidColorBrush.OpacityProperty, LayoutRootAnim);
-            await Task.Delay(TimeSpan.FromSeconds(0.5));
+            //LayoutRootAnim.From = 0;
+            //LayoutRootAnim.To = 1;
+            //LayoutRootAnim.Duration = new Duration(TimeSpan.FromSeconds(0.5));
+            //LayoutRoot.Background.BeginAnimation(SolidColorBrush.OpacityProperty, LayoutRootAnim);
+            //await Task.Delay(TimeSpan.FromSeconds(0.5));
         }
 
         private void CommonMouseNotOver(object sender, EventArgs e)
         {
             System.Windows.Controls.Button btn = sender as System.Windows.Controls.Button;
             var LayoutRootAnim = new DoubleAnimation();
-            LayoutRootAnim.From = 1;
-            LayoutRootAnim.To = 0;
-            LayoutRootAnim.Duration = new Duration(TimeSpan.FromSeconds(0.5));
-            LayoutRoot.Background.BeginAnimation(SolidColorBrush.OpacityProperty, LayoutRootAnim);
-            LayoutRoot.Background.Opacity = 0;
+            //LayoutRootAnim.From = 1;
+            //LayoutRootAnim.To = 0;
+            //LayoutRootAnim.Duration = new Duration(TimeSpan.FromSeconds(0.5));
+            //LayoutRoot.Background.BeginAnimation(SolidColorBrush.OpacityProperty, LayoutRootAnim);
+            //LayoutRoot.Background.Opacity = 0;
             LayoutRoot.Background = new ImageBrush(new BitmapImage(new Uri(BaseUriHelper.GetBaseUri(this), "../Resources/homecinema.png")));
-            LayoutRootAnim.From = 0;
-            LayoutRootAnim.To = 1;
-            LayoutRootAnim.Duration = new Duration(TimeSpan.FromSeconds(1));
-            LayoutRoot.Background.BeginAnimation(SolidColorBrush.OpacityProperty, LayoutRootAnim);
+            //LayoutRootAnim.From = 0;
+            //LayoutRootAnim.To = 1;
+            //LayoutRootAnim.Duration = new Duration(TimeSpan.FromSeconds(1));
+            //LayoutRoot.Background.BeginAnimation(SolidColorBrush.OpacityProperty, LayoutRootAnim);
         }
 
         private void timer_Tick(object sender, EventArgs e)

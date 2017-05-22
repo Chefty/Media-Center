@@ -52,21 +52,27 @@ namespace MyMediaCenter.View
         public String[] Views = new String[] { "Thumbnail", "List" };
         public int view = 0;
         private bool userIsDraggingSlider = false;
-        string MyConnectionStr = "server=db4free.net;Port=3306; User ID = chefte_f; password=toto1234; database=fantasticfour";
+        string MyConnectionStr = "server=sql12.freemysqlhosting.net;Port=3306; User ID = sql12174934; password=YpkJJk4RTk; database=sql12174934";
         int tmp = 0;
+        bool loopPlay = false;
+        bool RandomPlay = false;
 
         public MusicView()
         {
             InitializeComponent();
             BackHomeBtn.Click += BackHomeButtonClicked;
             ImportMusic.Click += ImportFolder;
+            Pause.Click += MediaPause;
             Stop.Click += MediaStop;
             Play.Click += MediaPlay;
             Close.Click += MediaClose;
             Prev.Click += MediaRestart;
-            Forward.Click += MediaForward;
-            Backward.Click += MediaToward;
-            Next.Click += Media_Go_End;
+            Next.Click += MediaNext;
+            VolumeOn.Click += MediaMute;
+            VolumeOff.Click += MediaUnmute;
+            Repeat.Click += MediaLoopPlay;
+            Random.Click += MediaRandomPlay;
+            media.MediaEnded += MediaEnded;
             //media.MouseDown += fullscreen;
             Music_duration.MouseDoubleClick += new MouseButtonEventHandler(ThumbMouseEnter);
             DispatcherTimer timer = new DispatcherTimer();
@@ -109,10 +115,10 @@ namespace MyMediaCenter.View
             var ActionsGridAnim = new DoubleAnimation();
             var BGAnim = new DoubleAnimation();
             LayoutRoot.Background = new ImageBrush(new BitmapImage(new Uri(BaseUriHelper.GetBaseUri(this), "../Resources/homecinema.png")));
-            BGAnim.From = 0.3;
-            BGAnim.To = 1;
-            BGAnim.Duration = new Duration(TimeSpan.FromSeconds(0.5));
-            LayoutRoot.Background.BeginAnimation(SolidColorBrush.OpacityProperty, BGAnim);
+            //BGAnim.From = 0.3;
+            //BGAnim.To = 1;
+            //BGAnim.Duration = new Duration(TimeSpan.FromSeconds(0.5));
+            //LayoutRoot.Background.BeginAnimation(SolidColorBrush.OpacityProperty, BGAnim);
             ActionsGridAnim.From = 220;
             ActionsGridAnim.To = 0;
             ActionsGridAnim.Duration = new Duration(TimeSpan.FromSeconds(0.25));
@@ -300,8 +306,12 @@ namespace MyMediaCenter.View
         private void LoadDictionnaries()
         {
             int PictureSelectedPos = 0;
-            string[] filePaths = Directory.GetFiles(pathN, "*.*", SearchOption.AllDirectories);
+            string[] filePaths = null;
+            if (pathN == null)
+                return;
+            filePaths = Directory.GetFiles(pathN, "*.*", SearchOption.AllDirectories);
             string[] ext = { ".wav", ".ogg", ".mp3", ".mp4", ".mpeg4", ".midi", ".flac" };
+            string[] extcover = { ".jpg", ".jpeg", ".png", ".ico", ".JPG", ".PNG", ".ICO", ".JPEG" };
             ItPicture.Clear();
             foreach (var item in filePaths)
             {
@@ -338,7 +348,7 @@ namespace MyMediaCenter.View
                     string nameFolder = new DirectoryInfo(System.IO.Path.GetFileName(it.Value)).Name;
                     BitmapImage myBitmapImage1 = new BitmapImage();
                     myBitmapImage1.BeginInit();
-                    myBitmapImage1.UriSource = new Uri(BaseUriHelper.GetBaseUri(this), "../Resources/icon-music.png");
+                    myBitmapImage1.UriSource = new Uri(BaseUriHelper.GetBaseUri(this), "../Resources/ic_exit.png");
                     myBitmapImage1.EndInit();
                     Image myImage1 = new Image();
                     myImage1.Width = 100;
@@ -382,6 +392,7 @@ namespace MyMediaCenter.View
                 {
                     if (kvp.Key == Thumbnail.SelectedIndex) //création de la nouvelle image
                     {
+                        MediaElementName.Text = Path.GetFileName(kvp.Value);
                         tmp = a;
                         media.Source = new Uri(kvp.Value); /* JE LANCE LA VIDEO */
                         media.Play();
@@ -394,6 +405,7 @@ namespace MyMediaCenter.View
                 {
                     if (kvp.Key == List.SelectedIndex) //création de la nouvelle image
                     {
+                        MediaElementName.Text = Path.GetFileName(kvp.Value);
                         System.Windows.MessageBox.Show(Views[view]);
                         tmp = a;
                         media.Source = new Uri(kvp.Value); /* JE LANCE LA VIDEO */
@@ -406,17 +418,24 @@ namespace MyMediaCenter.View
                 a++;
             }
         }
-        private async void MediaStop(object sender, EventArgs e) /*J'APPUIE SUR PAUSE*/
+        private async void MediaPause(object sender, EventArgs e) /*J'APPUIE SUR PAUSE*/
         {
             media.Pause();
-            Stop.Visibility = rv;
+            Pause.Visibility = rv;
             Play.Visibility = ry;
         }
         private async void MediaPlay(object sender, EventArgs e) /*J'APPUIE SUR PLAY */
         {
             media.Play();
-            Stop.Visibility = ry;
+            Pause.Visibility = ry;
             Play.Visibility = rv;
+        }
+
+        private async void MediaStop(object sender, EventArgs e) /*J'APPUIE SUR PAUSE*/
+        {
+            media.Stop();
+            Pause.Visibility = rv;
+            Play.Visibility = ry;
         }
         private async void MediaRestart(object sender, EventArgs e) /*JE REMET A 0 LA VIDEO */
         {
@@ -427,7 +446,7 @@ namespace MyMediaCenter.View
                 check = true;
             }
             else
-                last_video();
+                MediaPrevious();
             if (Play.Visibility == ry)
             {
                 Play.Visibility = ry;
@@ -440,7 +459,40 @@ namespace MyMediaCenter.View
             }
         }
 
-        private void last_video()
+        private async void MediaMute(object sender, EventArgs e) /*MUTE LE SON*/
+        {
+            media.IsMuted = true;
+            VolumeOn.Visibility = rv;
+            VolumeOff.Visibility = ry;
+        }
+
+        private async void MediaUnmute(object sender, EventArgs e) /*UNMUTE LE SON*/
+        {
+            media.IsMuted = false;
+            VolumeOn.Visibility = ry;
+            VolumeOff.Visibility = rv;
+        }
+
+        private async void MediaLoopPlay(object sender, EventArgs e) /*ACTIVE LA REPETITION EN BOUCLE*/
+        {
+            if (!loopPlay)
+                Repeat.Background = Brushes.CornflowerBlue;
+            else
+                Repeat.Background = Brushes.Transparent;
+            loopPlay = !loopPlay;
+        }
+
+        private async void MediaRandomPlay(object sender, EventArgs e) /*ACTIVE LA LECTURE ALEATOIRE*/
+        {
+            if (!RandomPlay)
+                Random.Background = Brushes.CornflowerBlue;
+            else
+                Random.Background = Brushes.Transparent;
+            RandomPlay = !RandomPlay;
+        }
+
+
+        private void MediaPrevious()
         {
             int a = 0;
             if (tmp == 0 && check == true) /* Je suis a la premiere video de la liste et je l'ai deja avancé jusqu'a la fin, donc je ferme tout*/
@@ -460,6 +512,7 @@ namespace MyMediaCenter.View
                     media.Close();
                     media.Source = new Uri(kvp.Value);
                     media.Play();
+                    MediaElementName.Text = Path.GetFileName(kvp.Value);
                     media.Volume = 0.5;
                     check = false;
                     break;
@@ -468,29 +521,7 @@ namespace MyMediaCenter.View
                     a++;
             }
         }
-
-        private async void MediaForward(object sender, EventArgs e) /*J AVANCE DE DEUX SECONDES DANS LA VIDEO */
-        {
-            TimeSpan ts = new TimeSpan(0, 0, 0, ((int)media.Position.TotalSeconds) + 2, 0);
-            media.Position = ts;
-        }
-        private async void MediaToward(object sender, EventArgs e) /*JE RECULE DE DEUX SECONDES DANS LA VIDEO */
-        {
-            TimeSpan ts = new TimeSpan(0, 0, 0, ((int)media.Position.TotalSeconds) - 2, 0);
-            media.Position = ts;
-        }
-        private async void Media_Go_End(object sender, EventArgs e) /*JE VAIS A LA FIN DE VIDEO*/
-        {
-            if ((media.NaturalDuration.TimeSpan.TotalSeconds != media.Position.TotalSeconds))
-            {
-                media.Position = new TimeSpan(0, 0, 0, (int)media.NaturalDuration.TimeSpan.TotalSeconds, 0);
-                check = true;
-            }
-            else
-                next_video();
-        }
-
-        private void next_video()
+        private async void MediaNext(object sender, EventArgs e) /*MEDIA SUIVANT*/
         {
             int a = 0;
             if (tmp == ItPicture.Count - 1 && check == true) /* Je suis a la derniere video de la liste et je l'ai deja avancé jusqu'a la fin, donc je ferme tout*/
@@ -509,6 +540,7 @@ namespace MyMediaCenter.View
                     tmp = a;
                     media.Source = new Uri(kvp.Value);
                     media.Play();
+                    MediaElementName.Text = Path.GetFileName(kvp.Value);
                     media.Volume = 0.5;
                     check = false;
                     break;
@@ -516,6 +548,17 @@ namespace MyMediaCenter.View
                 else
                     a++;
             }
+        }
+
+        private void MediaEnded(object sender, EventArgs e)
+        {
+            if (loopPlay)
+            {
+                media.Position = TimeSpan.Zero;
+                media.Play();
+            }
+            else
+                MediaNext(sender, e);
         }
 
         private async void MediaClose(object sender, EventArgs e) /*JE FERME MA VIDEO*/
@@ -558,7 +601,7 @@ namespace MyMediaCenter.View
                 List.IsEnabled = true;
                 // ListPreview.Visibility = Visibility.Visible;
                 // ListPreview.IsEnabled = true;
-                VideoList();
+                MusicList();
             }
         }
         private void DisplayPictureSortByDate(Boolean sort)
@@ -676,7 +719,7 @@ namespace MyMediaCenter.View
                 ItPicture.Add(it.Key, it.Value);
             ViewDisplay(Views[view]);
         }
-        private void VideoList()
+        private void MusicList()
         {
             if ((!Search.Text.Equals("")) && (!Search.Text.Equals("Search...")))
                 OrganizeGrid();
@@ -885,7 +928,7 @@ namespace MyMediaCenter.View
             else
             {
                 if (Search.Text.Equals(""))
-                    VideoList();
+                    MusicList();
                 else
                     OrganizeGrid();
             }

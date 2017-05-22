@@ -8,47 +8,53 @@
              mc:Ignorable="d">
     <Grid x:Name="LayoutRoot" Margin="0">
         <Grid.Background>
-            <ImageBrush ImageSource="../Resources/homecinema.png" Opacity="0.4"/>
+            <ImageBrush ImageSource="../Resources/homecinema.png" Opacity="1"/>
         </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="0"/>
             <RowDefinition Height="0"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <TextBlock x:Name="Date" Text="{Binding Source={x:Static sys:DateTime.Now}, StringFormat='{}{0:dddd, MMMM dd, yyyy}'}" FontSize="14.667" FontFamily="Century Gothic" HorizontalAlignment="Right" VerticalAlignment="Top" Foreground="White" Height="18" Grid.Row="1" Width="187" Grid.RowSpan="2" Margin="0,5,5,0"/>
-        <TextBlock x:Name="Time" Text="{Binding Source={x:Static sys:DateTime.Now}, StringFormat='{}{0:hh:mm}'}" Margin="0,15,10,0" FontFamily="Century Gothic" FontWeight="Bold" FontSize="48" VerticalAlignment="Top" HorizontalAlignment="Right" Foreground="White" Height="59" Width="122" Grid.Row="1" Grid.RowSpan="2"/>
-        <Grid x:Name="ButtonsGrid" Margin="0" Grid.Row="1" Height="167" VerticalAlignment="Center" Grid.RowSpan="2">
+        <TextBlock x:Name="Date" Text="{Binding Source={x:Static sys:DateTime.Now}, StringFormat='{}{0:dddd, MMMM dd yyyy}'}" FontSize="14.667" FontFamily="Century Gothic" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#2b2b2b" Height="18" Grid.Row="1" Width="187" Grid.RowSpan="2" Margin="5,5,0,0"/>
+        <TextBlock x:Name="Time" Text="{Binding Source={x:Static sys:DateTime.Now}, StringFormat='{}{0:hh:mm}'}" Margin="5,15,0,0" FontFamily="Century Gothic" FontWeight="Bold" FontSize="48" VerticalAlignment="Top" HorizontalAlignment="Left" Foreground="#2b2b2b" Height="59" Width="122" Grid.Row="1" Grid.RowSpan="2"/>
+        <Grid x:Name="ButtonsGrid" Margin="0,0,0,225" Grid.Row="1" Height="167" VerticalAlignment="Bottom" Grid.RowSpan="2">
             <Grid.Background>
-                <ImageBrush ImageSource="../Resources/GridBG.png" Opacity="0.7"/>
+                <ImageBrush ImageSource="../Resources/GridBG.png" Opacity="0.0"/>
             </Grid.Background>
             <Button x:Name="MusicBtn" Height="143" VerticalAlignment="Center" Command="{Binding DataContext.switchViewCommand, Mode=OneWay, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" CommandParameter="{x:Static VM:MainWindowViewModel+ViewType.Music}" Style="{DynamicResource MetroCircleButtonStyle}" Margin="361,16,197,8" Width="143">
-                <Button.Content>
-                    <Image Source="../Resources/music.png" Stretch="Fill"  Width="40" Height="40"/>
-                </Button.Content>
+                <TextBlock FontSize="20">Music</TextBlock>
+                <Button.Background>
+                    <ImageBrush ImageSource="../Resources/GridBG.png" Opacity="0.8"/>
+                </Button.Background>
             </Button>
             <Button x:Name="PictureBtn" Height="143"
             VerticalAlignment="Center"
                     Command="{Binding DataContext.switchViewCommand, Mode=OneWay, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" CommandParameter="{x:Static VM:MainWindowViewModel+ViewType.Picture}"
             Style="{DynamicResource MetroCircleButtonStyle}" Margin="198,16,360,8" Width="143">
-                <Button.Content>
-                    <Image Source="../Resources/picture.png" Stretch="Fill"  Width="40" Height="40" />
-                </Button.Content>
+                <TextBlock FontSize="20">Picture</TextBlock>
+                <Button.Background>
+                    <ImageBrush ImageSource="../Resources/GridBG.png" Opacity="0.8"/>
+                </Button.Background>
             </Button>
             <Button x:Name="VideoBtn" Width="143"
             Height="144"
             VerticalAlignment="Center"
             Command="{Binding DataContext.switchViewCommand, Mode=OneWay, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" CommandParameter="{x:Static VM:MainWindowViewModel+ViewType.Video}"
             Style="{DynamicResource MetroCircleButtonStyle}" Margin="37,16,521,7" HorizontalAlignment="Center">
-                <Button.Content>
-                    <Image Source="../Resources/video.png" Stretch="Fill"  Width="40" Height="40"/>
-                </Button.Content>
+                <TextBlock FontSize="20">Video</TextBlock>
+                <Button.Background>
+                    <ImageBrush ImageSource="../Resources/GridBG.png" Opacity="0.8"/>
+                </Button.Background>
             </Button>
             <Button x:Name="RadioBtn" Width="142"
             	Height="144"
             	VerticalAlignment="Center"
             	Command="{Binding DataContext.switchViewCommand, Mode=OneWay, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" CommandParameter="{x:Static VM:MainWindowViewModel+ViewType.Radio}"
             	Style="{DynamicResource MetroCircleButtonStyle}" Margin="579,12,90.2,11" HorizontalAlignment="Center">
-                <Image Source="../Resources/antenna.png" Stretch="Fill"  Width="40" Height="40"/>
+                <TextBlock FontSize="20">Radio</TextBlock>
+                <Button.Background>
+                    <ImageBrush ImageSource="../Resources/GridBG.png" Opacity="0.8"/>
+                </Button.Background>
             </Button>
         </Grid>
         <Button x:Name="SettingsBtn"
@@ -59,6 +65,9 @@
             <Button.Content>
                 <Image Source="../Resources/settings.png" Stretch="Uniform"  Width="20" Height="20"/>
             </Button.Content>
+            <Button.Background>
+                <ImageBrush ImageSource="../Resources/GridBG.png" Opacity="0.8"/>
+            </Button.Background>
         </Button>
         <Button x:Name="ExitBtn"
             Height="50"
@@ -68,6 +77,9 @@
             <Button.Content>
                 <Image Source="../Resources/poweroff.png" Stretch="Uniform"  Width="20" Height="20"/>
             </Button.Content>
+            <Button.Background>
+                <ImageBrush ImageSource="../Resources/GridBG.png" Opacity="0.8"/>
+            </Button.Background>
         </Button>
     </Grid>
 </UserControl>

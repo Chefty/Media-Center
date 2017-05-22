@@ -51,7 +51,7 @@ namespace MyMediaCenter.View
         public Dictionary<int, string> ItPicture = new Dictionary<int, string>();
         public String[] Views = new String[] { "Thumbnail", "List" };
         public int view = 0;
-        string MyConnectionStr = "server=db4free.net;Port=3306; User ID = chefte_f; password=toto1234; database=fantasticfour";
+        string MyConnectionStr = "server=sql12.freemysqlhosting.net;Port=3306; User ID = sql12174934; password=YpkJJk4RTk; database=sql12174934";
 
         public PictureView()
         {
@@ -288,12 +288,14 @@ namespace MyMediaCenter.View
                 return false;
             }
         }
-           
 
         private void LoadDictionnaries()
         {
             int PictureSelectedPos = 0;
-            string[] filePaths = Directory.GetFiles(pathN, "*.*", SearchOption.AllDirectories);
+            string[] filePaths = null;
+            if (pathN == null)
+                return;
+            filePaths = Directory.GetFiles(pathN, "*.*", SearchOption.AllDirectories);
             string[] ext = { ".jpg", ".jpeg", ".png", ".ico", ".JPG", ".PNG", ".ICO", ".JPEG" };
             ItPicture.Clear();
             foreach (var item in filePaths)

@@ -53,7 +53,7 @@ namespace MyMediaCenter.View
         public String[] Views = new String[] { "Thumbnail", "List" };
         public int view = 0;
         private bool userIsDraggingSlider = false;
-        string MyConnectionStr = "server=db4free.net;Port=3306; User ID = chefte_f; password=toto1234; database=fantasticfour";
+        string MyConnectionStr = "server=sql12.freemysqlhosting.net;Port=3306; User ID = sql12174934; password=YpkJJk4RTk; database=sql12174934";
         int tmp = 0;
 
         public VideoView()
@@ -299,7 +299,10 @@ namespace MyMediaCenter.View
         private void LoadDictionnaries()
         {
             int PictureSelectedPos = 0;
-            string[] filePaths = Directory.GetFiles(pathN, "*.*", SearchOption.AllDirectories);
+            string[] filePaths = null;
+            if (pathN == null)
+                return;
+            filePaths = Directory.GetFiles(pathN, "*.*", SearchOption.AllDirectories);
             string[] ext = { ".mp4", ".avi", ".wav", ".wmv" };
             ItPicture.Clear();
             foreach (var item in filePaths)
@@ -819,7 +822,7 @@ namespace MyMediaCenter.View
                 Thumbnail.Items.Clear();
                 int PictureSelectedPos = 0;
                 string[] filePaths = Directory.GetFiles(pathN, "*.*", SearchOption.AllDirectories);
-                string[] ext = { ".mp4", ".avi", ".wav", ".wmv" };
+                string[] ext = { ".mp4", ".avi", ".wav", ".wmv", ".mkv" };
                 ItPicture.Clear();
                 foreach (var item in filePaths)
                 {

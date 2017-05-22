@@ -52,7 +52,7 @@ namespace MyMediaCenter.View
         public String[] SortingOrder = new String[] { "Ascending", "Descending" };
         public String[] SortingType = new String[] { "Name", "Date", "Size", "Duration" };
         public String[] Views = new String[] { "Thumbnail", "List" };
-        string MyConnectionStr = "server=db4free.net;Port=3306; User ID = chefte_f; password=toto1234; database=fantasticfour";
+        string MyConnectionStr = "server=sql12.freemysqlhosting.net;Port=3306; User ID = sql12174934; password=YpkJJk4RTk; database=sql12174934";
         int RadioIndex;
         Dictionary<string, string> d = new Dictionary<string, string>();
         public Dictionary<int, string> ItPicture = new Dictionary<int, string>();
@@ -266,7 +266,10 @@ namespace MyMediaCenter.View
         private void LoadDictionnaries()
         {
             int PictureSelectedPos = 0;
-            string[] filePaths = Directory.GetFiles(pathN, "*.*", SearchOption.AllDirectories);
+            string[] filePaths = null;
+            if (pathN == null)
+                return;
+            filePaths = Directory.GetFiles(pathN, "*.*", SearchOption.AllDirectories);
             string[] ext = { ".pls" };
             ItPicture.Clear();
             foreach (var item in filePaths)

@@ -1,0 +1,33 @@
+--Media Center Glitch/Bug log--
+
+##Video:
+- Not all video format handled
+- Video controller:
+	-> make it pop from the bottom instead of fade
+	-> forward, backward, next, previous wrong behaviour
+	-> time position: can't click to move cursor
+	-> volume lever: can't click to move cursor
+	-> add stop + pause + mute buttons
+- Search only char order
+-
+
+##Music
+- Music titles bug --> afficher que les titres en thumbnail
+- Load jacket
+- Music controller:
+	-> fade in/out mouse mouvement
+	-> forward, backward, next, previous wrong behaviour //DONE
+	-> time position: can't click to move cursor	//DONE
+	-> volume lever: can't click to move cursor	//DONE
+	-> add stop + pause + mute + repeat + random buttons //DONE
+
+##Images:
+- "id column" error //DONE
+-
+
+##Radio:
+- review all
+
+##System:
+- No settings
+- Apply recursive files search on import
