@@ -11,6 +11,12 @@ This project is a software system called “Media center”. Basically, it’s p
 -	Video online streaming player (Twitch)
 (As a Media center, the software is launched in fullscreen.)
 
+## Media format details
+- Video: ".mp4", ".avi", ".wav", ".wmv", ".mkv"
+- Music: ".wav", ".ogg", ".mp3", ".mp4", ".mpeg4", ".midi", ".flac"
+- Picture: ".jpg", ".jpeg", ".png", ".ico", ".JPG", ".PNG", ".ICO", ".JPEG"
+- Radio: ".pls", ".m3u"
+
 ## Project details
 - Type: WPF
 - Language: C#
@@ -19,8 +25,8 @@ This project is a software system called “Media center”. Basically, it’s p
 
 ## Screenshots
 ### Main menu view
-![alt text](http://drive.google.com/uc?export=view&id=0BwOX68QsRQ7aV01UTW9JMmZRY0U)
-### Video player view
-![alt text](http://drive.google.com/uc?export=view&id=0BwOX68QsRQ7aYk9LdWpzSVdRVjg)
-### Radio player view
-![alt text](http://drive.google.com/uc?export=view&id=0BwOX68QsRQ7ab0xjcjNoM0Fac2c)
+![alt text](http://drive.google.com/uc?export=view&id=0BwOX68QsRQ7aMGVrQjdrcTMzLU0)
+### Video menu view
+![alt text](http://drive.google.com/uc?export=view&id=0BwOX68QsRQ7aeWlLeTFEUzl1Tms)
+### Music player view
+![alt text](http://drive.google.com/uc?export=view&id=0BwOX68QsRQ7adGFjRlVwcnZMVFU)
