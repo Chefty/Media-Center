@@ -14,6 +14,7 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using MySql.Data.MySqlClient;
 using System.Data;
+using System.Linq;
 
 namespace MyMediaCenter.View
 {
@@ -52,7 +53,7 @@ namespace MyMediaCenter.View
         public String[] Views = new String[] { "Thumbnail", "List" };
         public int view = 0;
         private bool userIsDraggingSlider = false;
-        string MyConnectionStr = "server=sql12.freemysqlhosting.net;Port=3306; User ID = sql12174934; password=YpkJJk4RTk; database=sql12174934";
+        string MyConnectionStr = "server=mysql3.gear.host; Port=3306; User ID = mediacenter; password=Medi@center; database=mediacenter";
         int tmp = 0;
         bool loopPlay = false;
         bool RandomPlay = false;
@@ -348,7 +349,7 @@ namespace MyMediaCenter.View
                     string nameFolder = new DirectoryInfo(System.IO.Path.GetFileName(it.Value)).Name;
                     BitmapImage myBitmapImage1 = new BitmapImage();
                     myBitmapImage1.BeginInit();
-                    myBitmapImage1.UriSource = new Uri(BaseUriHelper.GetBaseUri(this), "../Resources/ic_exit.png");
+                    myBitmapImage1.UriSource = new Uri(BaseUriHelper.GetBaseUri(this), "../Resources/ic_music.png");
                     myBitmapImage1.EndInit();
                     Image myImage1 = new Image();
                     myImage1.Width = 100;
@@ -450,12 +451,12 @@ namespace MyMediaCenter.View
             if (Play.Visibility == ry)
             {
                 Play.Visibility = ry;
-                Stop.Visibility = rv;
+                Pause.Visibility = rv;
             }
             else
             {
                 Play.Visibility = rv;
-                Stop.Visibility = ry;
+                Pause.Visibility = ry;
             }
         }
 
@@ -473,29 +474,10 @@ namespace MyMediaCenter.View
             VolumeOff.Visibility = rv;
         }
 
-        private async void MediaLoopPlay(object sender, EventArgs e) /*ACTIVE LA REPETITION EN BOUCLE*/
-        {
-            if (!loopPlay)
-                Repeat.Background = Brushes.CornflowerBlue;
-            else
-                Repeat.Background = Brushes.Transparent;
-            loopPlay = !loopPlay;
-        }
-
-        private async void MediaRandomPlay(object sender, EventArgs e) /*ACTIVE LA LECTURE ALEATOIRE*/
-        {
-            if (!RandomPlay)
-                Random.Background = Brushes.CornflowerBlue;
-            else
-                Random.Background = Brushes.Transparent;
-            RandomPlay = !RandomPlay;
-        }
-
-
         private void MediaPrevious()
         {
             int a = 0;
-            if (tmp == 0 && check == true) /* Je suis a la premiere video de la liste et je l'ai deja avancé jusqu'a la fin, donc je ferme tout*/
+            if (tmp == 0 && check == true) /*Je suis a la premiere video de la liste et je l'ai deja reculé jusqu'au début, donc je ferme tout*/
             {
                 Thumbnail.SelectedItem = null;
                 media.Close();
@@ -521,9 +503,20 @@ namespace MyMediaCenter.View
                     a++;
             }
         }
+
         private async void MediaNext(object sender, EventArgs e) /*MEDIA SUIVANT*/
         {
             int a = 0;
+            Random rnd = new Random();
+            int track = rnd.Next(0, ItPicture.Count);
+            if (RandomPlay)
+            {
+                media.Source = new Uri(ItPicture[track]);
+                media.Play();
+                MediaElementName.Text = Path.GetFileName(ItPicture[track]);
+                media.Volume = 0.5;
+                check = false;
+            }
             if (tmp == ItPicture.Count - 1 && check == true) /* Je suis a la derniere video de la liste et je l'ai deja avancé jusqu'a la fin, donc je ferme tout*/
             {
                 Thumbnail.SelectedItem = null;
@@ -572,18 +565,38 @@ namespace MyMediaCenter.View
             ViewDisplay(Views[view]);
         }
 
+        private async void MediaLoopPlay(object sender, EventArgs e) /*ACTIVE LA REPETITION EN BOUCLE*/
+        {
+            if (!loopPlay)
+                Repeat.Background = Brushes.CornflowerBlue;
+            else
+                Repeat.Background = Brushes.Transparent;
+            loopPlay = !loopPlay;
+        }
+
+        private async void MediaRandomPlay(object sender, EventArgs e) /*ACTIVE LA LECTURE ALEATOIRE*/
+        {
+            if (!RandomPlay)
+                Random.Background = Brushes.CornflowerBlue;
+            else
+                Random.Background = Brushes.Transparent;
+            RandomPlay = !RandomPlay;
+        }
+
         private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) /*LE VOLUME A BOUGE */
         {
             var slider = sender as Slider;
             sound_volume = slider.Value;
             change_volume(sound_volume);
         }
+
         private void change_volume(double new_volume_sound) /* JAFFECTE LA NOUVELLE VALEUR DU VOLUME */
         {
             Console.WriteLine("SOUND ==> :");
             Console.WriteLine(new_volume_sound);
             media.Volume = new_volume_sound;
         }
+
         private void ViewDisplay(String view)
         {
             if (view.Equals("Thumbnail"))
@@ -873,7 +886,7 @@ namespace MyMediaCenter.View
                         {
                             if (isCorrupt(item) == true)
                             {
-                                if (Path.GetFileName(item).StartsWith(Search.Text))
+                                if (Path.GetFileName(item).ToUpper().Contains(Search.Text.ToUpper()))
                                 {
                                     var b = new Border()
                                     {
@@ -883,7 +896,7 @@ namespace MyMediaCenter.View
                                     string nameFolder = new DirectoryInfo(System.IO.Path.GetFileName(item)).Name;
                                     BitmapImage myBitmapImage1 = new BitmapImage();
                                     myBitmapImage1.BeginInit();
-                                    myBitmapImage1.UriSource = new Uri(BaseUriHelper.GetBaseUri(this), "../Resources/icon-video.png");
+                                    myBitmapImage1.UriSource = new Uri(BaseUriHelper.GetBaseUri(this), "../Resources/icon-music.png");
                                     myBitmapImage1.EndInit();
                                     Image myImage1 = new Image();
                                     myImage1.Width = 100;

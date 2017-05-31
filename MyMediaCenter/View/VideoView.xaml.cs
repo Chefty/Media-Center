@@ -53,7 +53,7 @@ namespace MyMediaCenter.View
         public String[] Views = new String[] { "Thumbnail", "List" };
         public int view = 0;
         private bool userIsDraggingSlider = false;
-        string MyConnectionStr = "server=sql12.freemysqlhosting.net;Port=3306; User ID = sql12174934; password=YpkJJk4RTk; database=sql12174934";
+        string MyConnectionStr = "server=mysql3.gear.host; Port=3306; User ID = mediacenter; password=Medi@center; database=mediacenter";
         int tmp = 0;
 
         public VideoView()
@@ -61,13 +61,14 @@ namespace MyMediaCenter.View
             InitializeComponent();
             BackHomeBtn.Click += BackHomeButtonClicked;
             ImportVideo.Click += ImportFolder;
+            Pause.Click += MediaPause;
             Stop.Click += MediaStop;
             Play.Click += MediaPlay;
             Close.Click += MediaClose;
             Prev.Click += MediaRestart;
-            Forward.Click += MediaForward;
-            Backward.Click += MediaToward;
-            Next.Click += Media_Go_End;
+            Next.Click += MediaNext;
+            VolumeOn.Click += MediaMute;
+            VolumeOff.Click += MediaUnmute;
             //media.MouseDown += fullscreen;
             video_duration.MouseDoubleClick += new MouseButtonEventHandler(ThumbMouseEnter);
             DispatcherTimer timer = new DispatcherTimer();
@@ -303,7 +304,7 @@ namespace MyMediaCenter.View
             if (pathN == null)
                 return;
             filePaths = Directory.GetFiles(pathN, "*.*", SearchOption.AllDirectories);
-            string[] ext = { ".mp4", ".avi", ".wav", ".wmv" };
+            string[] ext = { ".mp4", ".avi", ".wav", ".wmv", ".mkv" };
             ItPicture.Clear();
             foreach (var item in filePaths)
             {
@@ -408,18 +409,42 @@ namespace MyMediaCenter.View
                 a++;
             }
         }
-        private async void MediaStop(object sender, EventArgs e) /*J'APPUIE SUR PAUSE*/
+
+        private async void MediaPause(object sender, EventArgs e) /*J'APPUIE SUR PAUSE*/
         {
             media.Pause();
-            Stop.Visibility = rv;
+            Pause.Visibility = rv;
             Play.Visibility = ry;
         }
+
         private async void MediaPlay(object sender, EventArgs e) /*J'APPUIE SUR PLAY */
         {
             media.Play();
-            Stop.Visibility = ry;
+            Pause.Visibility = ry;
             Play.Visibility = rv;
         }
+
+        private async void MediaStop(object sender, EventArgs e) /*J'APPUIE SUR PAUSE*/
+        {
+            media.Stop();
+            Pause.Visibility = rv;
+            Play.Visibility = ry;
+        }
+
+        private async void MediaMute(object sender, EventArgs e) /*MUTE LE SON*/
+        {
+            media.IsMuted = true;
+            VolumeOn.Visibility = rv;
+            VolumeOff.Visibility = ry;
+        }
+
+        private async void MediaUnmute(object sender, EventArgs e) /*UNMUTE LE SON*/
+        {
+            media.IsMuted = false;
+            VolumeOn.Visibility = ry;
+            VolumeOff.Visibility = rv;
+        }
+
         private async void MediaRestart(object sender, EventArgs e) /*JE REMET A 0 LA VIDEO */
         {
             if (media.Position != TimeSpan.Zero)
@@ -429,20 +454,20 @@ namespace MyMediaCenter.View
                 check = true;
             }
             else
-                last_video();
+                MediaPrevious();
             if (Play.Visibility == ry)
             {
                 Play.Visibility = ry;
-                Stop.Visibility = rv;
+                Pause.Visibility = rv;
             }
             else
             {
                 Play.Visibility = rv;
-                Stop.Visibility = ry;
+                Pause.Visibility = ry;
             }
         }
 
-        private void last_video()
+        private void MediaPrevious()
         {
             int a = 0;
             if (tmp == 0 && check == true) /* Je suis a la premiere video de la liste et je l'ai deja avancé jusqu'a la fin, donc je ferme tout*/
@@ -471,28 +496,7 @@ namespace MyMediaCenter.View
             }
         }
 
-        private async void MediaForward(object sender, EventArgs e) /*J AVANCE DE DEUX SECONDES DANS LA VIDEO */
-        {
-            TimeSpan ts = new TimeSpan(0, 0, 0, ((int)media.Position.TotalSeconds) + 2, 0);
-            media.Position = ts;
-        }
-        private async void MediaToward(object sender, EventArgs e) /*JE RECULE DE DEUX SECONDES DANS LA VIDEO */
-        {
-            TimeSpan ts = new TimeSpan(0, 0, 0, ((int)media.Position.TotalSeconds) - 2, 0);
-            media.Position = ts;
-        }
-        private async void Media_Go_End(object sender, EventArgs e) /*JE VAIS A LA FIN DE VIDEO*/
-        {
-            if ((media.NaturalDuration.TimeSpan.TotalSeconds != media.Position.TotalSeconds))
-            {
-                media.Position = new TimeSpan(0, 0, 0, (int)media.NaturalDuration.TimeSpan.TotalSeconds, 0);
-                check = true;
-            }
-            else
-                next_video();
-        }
-
-        private void next_video()
+        private void MediaNext(object sender, EventArgs e)
         {
             int a = 0;
             if (tmp == ItPicture.Count - 1 && check == true) /* Je suis a la derniere video de la liste et je l'ai deja avancé jusqu'a la fin, donc je ferme tout*/
@@ -752,7 +756,7 @@ namespace MyMediaCenter.View
             var items = new List<Item>();
             int PictureSelectedPos = 0;
             string[] filePaths = Directory.GetFiles(pathN, "*.*", SearchOption.AllDirectories);
-            string[] ext = { ".jpg", ".png", ".ico" };
+            string[] ext = { ".mp4", ".avi", ".wav", ".wmv", ".mkv" };
             ItPicture.Clear();
             foreach (var item in filePaths)
             {

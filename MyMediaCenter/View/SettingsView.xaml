@@ -8,10 +8,10 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid x:Name="LayoutRoot">
         <Grid.Background>
-            <ImageBrush ImageSource="../Resources/SettingsBG.jpg" Opacity="0.4"/>
+            <ImageBrush ImageSource="../Resources/SettingsBG2.png" Opacity="0.4"/>
         </Grid.Background>
         <Grid x:Name="ActionsGrid" HorizontalAlignment="Left" Margin="0" Width="197" Background="#FF282828" RenderTransformOrigin="0.5,0.5">
-            <Image x:Name="ActionIcon" Source="../Resources/settings.png" Margin="7,7,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="55" Height="55"/>
+            <Image x:Name="ActionIcon" Source="../Resources/ic_settings.png" Margin="7,7,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="55" Height="55"/>
             <Label x:Name="ActionName" Content="Settings" Margin="0,11,13,0" FontFamily="Century Gothic" FontSize="32" FontWeight="Bold" RenderTransformOrigin="1,0.5"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Top" HorizontalAlignment="Right"/>
             <Button x:Name="BackHomeBtn"
     			Height="60"

@@ -27,13 +27,18 @@
                 </EventTrigger>
             </Style.Triggers>
         </Style>
+        <Image x:Key="Play" Source="../Resources/ic_play.png" Width="30" Height="30"/>
+        <Image x:Key="Pause" Source="../Resources/ic_pause.png" Width="30" Height="30"/>
+        <Image x:Key="Previous" Source="../Resources/ic_previous.png" Width="30" Height="30"/>
+        <Image x:Key="Next" Source="../Resources/ic_next.png" Width="30" Height="30"/>
+        <Image x:Key="Exit" Source="../Resources/ic_exit.png" Width="20" Height="20"/>
     </UserControl.Resources>
     <Grid x:Name="LayoutRoot">
         <Grid.Background>
-            <ImageBrush ImageSource="../Resources/PictureBG.jpg" Opacity="0.4"/>
+            <ImageBrush ImageSource="../Resources/PicturesBG2.png" Opacity="0.4"/>
         </Grid.Background>
         <Grid x:Name="ActionsGrid" HorizontalAlignment="Left" Width="0" Background="#FF282828" RenderTransformOrigin="0.834,0.615" Margin="0,0,0,0.2">
-            <Image x:Name="ActionIcon" Source="../Resources/picture.png" HorizontalAlignment="Left" VerticalAlignment="Top" Width="55" Height="55" Margin="10,6,0,0"/>
+            <Image x:Name="ActionIcon" Source="../Resources/ic_picture.png" HorizontalAlignment="Left" VerticalAlignment="Top" Width="55" Height="55" Margin="10,6,0,0"/>
             <Label x:Name="ActionName" Content="Picture" Margin="72,11,13,0" FontFamily="Century Gothic" FontSize="32" FontWeight="Bold" RenderTransformOrigin="1,0.5"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Top" HorizontalAlignment="Left" Width="115"/>
             <Button x:Name="BackHomeBtn"
 				Height="52"
@@ -68,23 +73,14 @@
         <Grid x:Name="Viewer" IsEnabled="false" Visibility="Hidden" Background="#FF1E1E1E">
             <Image x:Name="ViewerContent"/>
         </Grid>
-        <Border x:Name="ButtonGridBorder" Style ="{StaticResource FadeOutButton}" Visibility="Hidden" Background="#FF282828" RenderTransformOrigin="0,0"  Height="82" Margin="500,0,500,10" CornerRadius="10,10,10,10" VerticalAlignment="Bottom" HorizontalAlignment="Center" Width="344" Opacity="0.1">
+        <Border x:Name="ButtonGridBorder" Style ="{StaticResource FadeOutButton}" Visibility="Hidden" Background="#FF282828" RenderTransformOrigin="0,0"  Height="80" Margin="500,0,500,10" CornerRadius="10,10,10,10" VerticalAlignment="Bottom" HorizontalAlignment="Center" Width="240" Opacity="0.1">
             <Grid x:Name="ButtonGrid" RenderTransformOrigin="0,0" VerticalAlignment="Bottom"  Height="82" HorizontalAlignment="Center" Margin="10,0,10,-0.4" Width="676">
-                <Button x:Name="Prev" Height="70" Width="70" Visibility="Visible" Style="{DynamicResource MetroCircleButtonStyle}" Margin="0,0,150,0" Background="#1E1E1E">
-                    <Button.Content>
-                        <Image Source="../Resources/go_start.png" Stretch="Fill"  Width="70" Height="70" />
-                    </Button.Content>
-                </Button>
-                <Button x:Name="Next" Height="70" Width="70" Visibility="Visible" Style="{DynamicResource MetroCircleButtonStyle}" Margin="0" Background="#1E1E1E">
-                    <Button.Content>
-                        <Image Source="../Resources/go_end.png" Stretch="Fill"  Width="70" Height="70"/>
-                    </Button.Content>
-                </Button>
-                <Button x:Name="Close" Height="70" Width="70" Visibility="Visible" Style="{DynamicResource MetroCircleButtonStyle}" Margin="150,0,0,0" Background="#1E1E1E">
-                    <Button.Content>
-                        <Image Source="../Resources/close.png" Stretch="Fill"  Width="70" Height="70" />
-                    </Button.Content>
-                </Button>
+                <Button x:Name="Prev" Width="40" Height="40" Visibility="Visible" Style="{DynamicResource MetroCircleButtonStyle}" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,20,100,0" Background="#1E1E1E" Content="{StaticResource Previous}"/>
+                <Button x:Name="Pause" Width="40" Height="40" Visibility="Visible" Style="{DynamicResource MetroCircleButtonStyle}" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,20,0,0"  Background="#1E1E1E" Content="{StaticResource Pause}"/>
+                <Button x:Name="Play" Width="40" Height="40" Visibility="Visible" Style="{DynamicResource MetroCircleButtonStyle}" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,20,0,0" Background="#1E1E1E" Content="{StaticResource Play}"/>
+                <Button x:Name="Next" Width="40" Height="40" Visibility="Visible" Style="{DynamicResource MetroCircleButtonStyle}" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="100,20,0,0" Background="#1E1E1E" Content="{StaticResource Next}"/>
+                <Button x:Name="Close" Width="35" Height="35" Visibility="Visible" Style="{DynamicResource MetroCircleButtonStyle}" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="190,45,0,0"  Background="#1E1E1E" Content="{StaticResource Exit}"/>
+
             </Grid>
         </Border>
     </Grid>

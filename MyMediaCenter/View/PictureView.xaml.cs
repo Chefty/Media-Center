@@ -51,7 +51,7 @@ namespace MyMediaCenter.View
         public Dictionary<int, string> ItPicture = new Dictionary<int, string>();
         public String[] Views = new String[] { "Thumbnail", "List" };
         public int view = 0;
-        string MyConnectionStr = "server=sql12.freemysqlhosting.net;Port=3306; User ID = sql12174934; password=YpkJJk4RTk; database=sql12174934";
+        string MyConnectionStr = "server=mysql3.gear.host; Port=3306; User ID = mediacenter; password=Medi@center; database=mediacenter";
 
         public PictureView()
         {

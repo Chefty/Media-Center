@@ -41,7 +41,7 @@
             <ImageBrush ImageSource="../Resources/MusicBG2.png" Opacity="0.6"/>
         </Grid.Background>
         <Grid x:Name="ActionsGrid" Margin="0" Background="#FF282828" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left">
-            <Image x:Name="ActionIcon" Source="../Resources/music.png" Margin="7,7,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="55" Height="55"/>
+            <Image x:Name="ActionIcon" Source="../Resources/ic_music.png" Margin="7,7,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="55" Height="55"/>
             <Label x:Name="ActionName" Content="Music" Margin="0,11,13,0" FontFamily="Century Gothic" FontSize="32" FontWeight="Bold" RenderTransformOrigin="1,0.5"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Top" HorizontalAlignment="Right"/>
             <Button x:Name="BackHomeBtn"
 				Height="52"

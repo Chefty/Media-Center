@@ -52,7 +52,7 @@ namespace MyMediaCenter.View
         public String[] SortingOrder = new String[] { "Ascending", "Descending" };
         public String[] SortingType = new String[] { "Name", "Date", "Size", "Duration" };
         public String[] Views = new String[] { "Thumbnail", "List" };
-        string MyConnectionStr = "server=sql12.freemysqlhosting.net;Port=3306; User ID = sql12174934; password=YpkJJk4RTk; database=sql12174934";
+        string MyConnectionStr = "server=mysql3.gear.host; Port=3306; User ID = mediacenter; password=Medi@center; database=mediacenter";
         int RadioIndex;
         Dictionary<string, string> d = new Dictionary<string, string>();
         public Dictionary<int, string> ItPicture = new Dictionary<int, string>();
@@ -65,11 +65,14 @@ namespace MyMediaCenter.View
             InitializeComponent();
             BackHomeBtn.Click += BackHomeButtonClicked;
             ImportRadio.Click += ImportFolder;
+            Pause.Click += MediaPause;
             Stop.Click += MediaStop;
             Play.Click += MediaPlay;
-            Forward.Click += Media_Go_End;
-            Backward.Click += MediaRestart;
-            //LoadPathFolder();
+            //Prev.Click += MediaRestart;
+            //Next.Click += MediaNext;
+            VolumeOn.Click += MediaMute;
+            VolumeOff.Click += MediaUnmute;
+            LoadPathFolder();
             loadFolderOnFolders();
             AnimActionsGrid();
             DispatcherTimer timer = new DispatcherTimer();
@@ -270,7 +273,7 @@ namespace MyMediaCenter.View
             if (pathN == null)
                 return;
             filePaths = Directory.GetFiles(pathN, "*.*", SearchOption.AllDirectories);
-            string[] ext = { ".pls" };
+            string[] ext = { ".pls", ".m3u" };
             ItPicture.Clear();
             foreach (var item in filePaths)
             {
@@ -358,8 +361,6 @@ namespace MyMediaCenter.View
                             return;
                         }
                         isPlayingRadio = true;
-                        Thumbnail.Visibility = rv;
-                        media.Visibility = ry;
                         media.Source = new Uri(PlsContent.Substring(cutBegin, cutEnd - cutBegin));
                         media.Play();
                         media.Volume = 0.5;
@@ -377,19 +378,42 @@ namespace MyMediaCenter.View
                 a++;
             }
         }
-        private async void MediaStop(object sender, EventArgs e)
+
+        private async void MediaPause(object sender, EventArgs e) /*J'APPUIE SUR PAUSE*/
         {
             media.Pause();
-            Stop.Visibility = rv;
+            Pause.Visibility = rv;
             Play.Visibility = ry;
         }
-        private async void MediaPlay(object sender, EventArgs e)
+
+        private async void MediaPlay(object sender, EventArgs e) /*J'APPUIE SUR PLAY */
         {
-            media.Visibility = ry;
             media.Play();
-            Stop.Visibility = ry;
+            Pause.Visibility = ry;
             Play.Visibility = rv;
         }
+
+        private async void MediaStop(object sender, EventArgs e) /*J'APPUIE SUR PAUSE*/
+        {
+            media.Stop();
+            Pause.Visibility = rv;
+            Play.Visibility = ry;
+        }
+
+        private async void MediaMute(object sender, EventArgs e) /*MUTE LE SON*/
+        {
+            media.IsMuted = true;
+            VolumeOn.Visibility = rv;
+            VolumeOff.Visibility = ry;
+        }
+
+        private async void MediaUnmute(object sender, EventArgs e) /*UNMUTE LE SON*/
+        {
+            media.IsMuted = false;
+            VolumeOn.Visibility = ry;
+            VolumeOff.Visibility = rv;
+        }
+
         private async void MediaRestart(object sender, EventArgs e)
         {
             System.IO.StreamReader PlsFile;
@@ -451,17 +475,8 @@ namespace MyMediaCenter.View
                 ++indexTmp;
             }
         }
-        private async void MediaForward(object sender, EventArgs e)
-        {
-            TimeSpan ts = new TimeSpan(0, 0, 0, ((int)media.Position.TotalSeconds) + 2, 0);
-            media.Position = ts;
-        }
-        private async void MediaToward(object sender, EventArgs e)
-        {
-            TimeSpan ts = new TimeSpan(0, 0, 0, ((int)media.Position.TotalSeconds) - 2, 0);
-            media.Position = ts;
-        }
-        private async void Media_Go_End(object sender, EventArgs e)
+
+        private async void MediaNext(object sender, EventArgs e)
         {
             System.IO.StreamReader PlsFile;
             bool isReopen = false;
@@ -781,7 +796,7 @@ namespace MyMediaCenter.View
             var items = new List<Item>();
             int PictureSelectedPos = 0;
             string[] filePaths = Directory.GetFiles(pathN, "*.*", SearchOption.AllDirectories);
-            string[] ext = { ".pls" };
+            string[] ext = { ".pls", ".m3u" };
             ItPicture.Clear();
             foreach (var item in filePaths)
             {
@@ -810,7 +825,7 @@ namespace MyMediaCenter.View
                 Thumbnail.Items.Clear();
                 int PictureSelectedPos = 0;
                 string[] filePaths = Directory.GetFiles(pathN, "*.*", SearchOption.AllDirectories);
-                string[] ext = { ".pls" };
+                string[] ext = { ".pls", ".m3u" };
                 ItPicture.Clear();
                 foreach (var item in filePaths)
                 {

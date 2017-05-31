@@ -25,13 +25,21 @@
                 </EventTrigger>
             </Style.Triggers>
         </Style>
+        <Image x:Key="Stop" Source="../Resources/ic_stop.png" Width="20" Height="20"/>
+        <Image x:Key="Play" Source="../Resources/ic_play.png" Width="30" Height="30"/>
+        <Image x:Key="Pause" Source="../Resources/ic_pause.png" Width="30" Height="30"/>
+        <Image x:Key="Previous" Source="../Resources/ic_previous.png" Width="30" Height="30"/>
+        <Image x:Key="Next" Source="../Resources/ic_next.png" Width="30" Height="30"/>
+        <Image x:Key="Exit" Source="../Resources/ic_exit.png" Width="20" Height="20"/>
+        <Image x:Key="VolumeOn" Source="../Resources/ic_volume_on.png" Width="20" Height="20"/>
+        <Image x:Key="VolumeOff" Source="../Resources/ic_volume_off.png" Width="20" Height="20"/>
     </UserControl.Resources>
     <Grid x:Name="LayoutRoot">
         <Grid.Background>
-            <ImageBrush ImageSource="../Resources/MovieBG.jpg" Opacity="0.4"/>
+            <ImageBrush ImageSource="../Resources/MovieBG2.png" Opacity="0.4"/>
         </Grid.Background>
         <Grid x:Name="ActionsGrid" Margin="0" Background="#FF282828" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left">
-            <Image x:Name="ActionIcon" Source="../Resources/video.png" Margin="7,7,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="55" Height="55"/>
+            <Image x:Name="ActionIcon" Source="../Resources/ic_film.png" Margin="7,7,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="55" Height="55"/>
             <Label x:Name="ActionName" Content="Video" Margin="0,11,13,0" FontFamily="Century Gothic" FontSize="32" FontWeight="Bold" RenderTransformOrigin="1,0.5"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Top" HorizontalAlignment="Right"/>
             <Button x:Name="BackHomeBtn"
 				Height="52"
@@ -64,47 +72,20 @@
         <Grid x:Name="mediaBG" Background="Black" Visibility="Hidden" Margin="0">
             <MediaElement x:Name="media" OpacityMask="#FFC92B2B" LoadedBehavior="Manual" Margin="0"/>
         </Grid>
-        <Border x:Name="ButtonGridBorder" Style ="{StaticResource FadeOutButton}" Visibility="Hidden" Background="#FF282828" RenderTransformOrigin="0,0"  Height="82" Margin="0,566,0,10" CornerRadius="10,10,10,10" HorizontalAlignment="Center" Width="580" Opacity="0.1" VerticalAlignment="Bottom">
-            <Grid x:Name="ButtonGrid" RenderTransformOrigin="0,0" VerticalAlignment="Bottom"  Height="112" HorizontalAlignment="Center" Margin="-210,-15,-150,-15.4" Width="940">
-                <Button x:Name="Stop" Height="50" Width="50" Visibility="Visible" Style="{DynamicResource MetroCircleButtonStyle}" Margin="401,43,489,19" Background="#1E1E1E">
-                    <Button.Content>
-                        <Image Source="../Resources/stop.png" Stretch="Fill"  Width="40" Height="40" />
-                    </Button.Content>
-                </Button>
-                <Button x:Name="Prev" Height="50" Width="50" Visibility="Visible" Style="{DynamicResource MetroCircleButtonStyle}" Margin="276,43,614,19" Background="#1E1E1E">
-                    <Button.Content>
-                        <Image Source="../Resources/go_start.png" Stretch="Fill"  Width="40" Height="40"/>
-                    </Button.Content>
-                </Button>
-                <Button x:Name="Next" Height="50" Width="50" Visibility="Visible" Style="{DynamicResource MetroCircleButtonStyle}" Margin="523,43,367,19" Background="#1E1E1E">
-                    <Button.Content>
-                        <Image Source="../Resources/go_end.png" Stretch="Fill"  Width="40" Height="40" />
-                    </Button.Content>
-                </Button>
-                <Button x:Name="Backward" Height="50" Width="50" Visibility="Visible" Style="{DynamicResource MetroCircleButtonStyle}" Margin="326,43,564,19" Background="#1E1E1E">
-                    <Button.Content>
-                        <Image Source="../Resources/backward.png" Stretch="Fill"  Width="40" Height="40" Margin="0,5,0,0" />
-                    </Button.Content>
-                </Button>
-                <Button x:Name="Forward" Height="50" Width="50" Visibility="Visible" Style="{DynamicResource MetroCircleButtonStyle}" Margin="474,43,416,19" Background="#1E1E1E">
-                    <Button.Content>
-                        <Image Source="../Resources/forward.png" Stretch="Fill"  Width="40" Height="40" />
-                    </Button.Content>
-                </Button>
-                <Button x:Name="Play" Height="50" Width="50" Visibility="Visible" Style="{DynamicResource MetroCircleButtonStyle}" Margin="401,43,489,19" Background="#1E1E1E">
-                    <Button.Content>
-                        <Image Source="../Resources/play.png" Stretch="Fill"  Width="40" Height="40" Margin="0,0,0,2" />
-                    </Button.Content>
-                </Button>
-                <Button x:Name="Close" Height="50" Width="50" Visibility="Visible" Style="{DynamicResource MetroCircleButtonStyle}" Margin="596,43,294,19" Background="#1E1E1E">
-                    <Button.Content>
-                        <Image Source="../Resources/close.png" Stretch="Fill"  Width="40" Height="40" />
-                    </Button.Content>
-                </Button>
-                <Slider x:Name="slider" Margin="664,0,161,41" VerticalAlignment="Bottom" ValueChanged="Slider_ValueChanged" Value ="0.5" Minimum="0" Maximum="1" BorderBrush="White" Height="23" HorizontalAlignment="Center" Width="115" />
-                <Slider x:Name="video_duration" Height="17" Margin="296,23,346,72" Width="298" Thumb.DragStarted="sliProgress_DragStarted"  Thumb.DragCompleted="sliProgress_DragCompleted" Foreground="#FF1A71FB" BorderBrush="#FF1A71FB" OpacityMask="#FF1A71FB" IsMoveToPointEnabled="true" ForceCursor="True" ValueChanged="update_time_video"/>
-                <TextBlock x:Name="video_text_start" Height="13" Margin="249,24,646,75" TextWrapping="Wrap" Text="00:00:00" Foreground="White">00:00:00</TextBlock>
-                <TextBlock x:Name="video_text_end" Height="13" Margin="599,23,290,76" TextWrapping="Wrap" Text="00:00:00" Width="51" Foreground="White">00:00:00</TextBlock>
+        <Border x:Name="ButtonGridBorder" Style ="{StaticResource FadeOutButton}" Visibility="Hidden" Background="#FF282828" RenderTransformOrigin="0,0" Height="80" Margin="0,0,0,10" CornerRadius="5,5,5,5" Width="720" Opacity="0.1" VerticalAlignment="Bottom">
+            <Grid x:Name="ButtonGrid" RenderTransformOrigin="0,0" Height="80" Width="900" VerticalAlignment="Bottom" HorizontalAlignment="Center">
+                <Button x:Name="Stop" Width="35" Height="35" Visibility="Visible" Style="{DynamicResource MetroCircleButtonStyle}" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,35,180,0" Background="#1E1E1E" Content="{StaticResource Stop}"/>
+                <Button x:Name="Prev" Width="40" Height="40" Visibility="Visible" Style="{DynamicResource MetroCircleButtonStyle}" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,30,80,0" Background="#1E1E1E" Content="{StaticResource Previous}"/>
+                <Button x:Name="Pause" Width="40" Height="40" Visibility="Visible" Style="{DynamicResource MetroCircleButtonStyle}" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,30,0,0"  Background="#1E1E1E" Content="{StaticResource Pause}"/>
+                <Button x:Name="Play" Width="40" Height="40" Visibility="Visible" Style="{DynamicResource MetroCircleButtonStyle}" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,30,0,0" Background="#1E1E1E" Content="{StaticResource Play}"/>
+                <Button x:Name="Next" Width="40" Height="40" Visibility="Visible" Style="{DynamicResource MetroCircleButtonStyle}" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="80,30,0,0" Background="#1E1E1E" Content="{StaticResource Next}"/>
+                <Button x:Name="Close" Width="35" Height="35" Visibility="Visible" Style="{DynamicResource MetroCircleButtonStyle}" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="180,35,0,0"  Background="#1E1E1E" Content="{StaticResource Exit}"/>
+                <Button x:Name="VolumeOff" Width="35" Height="35" Visibility="Visible" Style="{DynamicResource MetroCircleButtonStyle}" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="250,35,0,0"  Background="#1E1E1E" Content="{StaticResource VolumeOff}"/>
+                <Button x:Name="VolumeOn" Width="35" Height="35" Visibility="Visible" Style="{DynamicResource MetroCircleButtonStyle}" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="250,35,0,0"  Background="#1E1E1E" Content="{StaticResource VolumeOn}"/>
+                <Slider x:Name="slider" Height="20" Width="80" Margin="380,45,0,0" VerticalAlignment="Top" HorizontalAlignment="Center" IsMoveToPointEnabled="true" ValueChanged="Slider_ValueChanged" Value ="0.5" Minimum="0" Maximum="1" BorderBrush="White" />
+                <Slider x:Name="video_duration" Height="20" Width="700" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,10,0,0" Thumb.DragStarted="sliProgress_DragStarted" Thumb.DragCompleted="sliProgress_DragCompleted" Foreground="#FF1A71FB" BorderBrush="#FF1A71FB" OpacityMask="#FF1A71FB" IsMoveToPointEnabled="true" Ticks="2,4,6,8" ForceCursor="True" ValueChanged="update_time_video"/>
+                <TextBlock x:Name="video_text_start" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,30,650,0" TextWrapping="Wrap" Text="00:00:00" Foreground="White">00:00:00</TextBlock>
+                <TextBlock x:Name="video_text_end" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="650,30,0,0" TextWrapping="Wrap" Text="00:00:00" Foreground="White">00:00:00</TextBlock>
             </Grid>
         </Border>
     </Grid>
