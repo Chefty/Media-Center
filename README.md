@@ -1,7 +1,9 @@
 # Media-Center
 
 ## Description
-This project is a software system called “Media center”. Basically, it’s personalized version of currently existing Media center like Windows media center or XBMC.
+This is a 3rd year school project.
+A WPF media center appication.
+Basically, it’s personalized version of currently existing Media center like Windows media center or XBMC.
 
 ## Software features
 - Multimedia files player (pictures, song, video)
@@ -25,8 +27,12 @@ This project is a software system called “Media center”. Basically, it’s p
 
 ## Screenshots
 ### Main menu view
-![alt text](http://drive.google.com/uc?export=view&id=0BwOX68QsRQ7aMGVrQjdrcTMzLU0)
+<a href="https://github.com/Chefty/Chrome/blob/Dev/Assets/Textures/ChromeColor.png?raw=true"><img src="https://github.com/Chefty/Media-Center/blob/master/Screenshots/menu_view.png?raw=true" alt="Markdownify" width="600"></a>
 ### Video menu view
-![alt text](http://drive.google.com/uc?export=view&id=0BwOX68QsRQ7aeWlLeTFEUzl1Tms)
+<a href="https://github.com/Chefty/Chrome/blob/Dev/Assets/Textures/ChromeColor.png?raw=true"><img src="https://github.com/Chefty/Media-Center/blob/master/Screenshots/video_view.png?raw=true" alt="Markdownify" width="600"></a>
 ### Music player view
-![alt text](http://drive.google.com/uc?export=view&id=0BwOX68QsRQ7adGFjRlVwcnZMVFU)
+<a href="https://github.com/Chefty/Chrome/blob/Dev/Assets/Textures/ChromeColor.png?raw=true"><img src="https://github.com/Chefty/Media-Center/blob/master/Screenshots/music_play_view.png?raw=true" alt="Markdownify" width="600"></a>
+
+## License
+
+This project is under MIT license.
